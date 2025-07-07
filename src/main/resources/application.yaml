@@ -30,3 +30,7 @@ spring:
 logging:
   level:
     root: INFO
+    org.springframework: INFO
+    org.springframework.web: WARN
+    org.hibernate: WARN
+    org.apache.coyote.http11: ERROR

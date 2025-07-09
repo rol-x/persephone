@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig {
+    private static final String[] ALLOWED_ORIGINS = { "https://persephone.run" };
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -14,7 +15,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(@SuppressWarnings("NullableProblems") CorsRegistry registry) {
                 registry.addMapping("/**")
-                    .allowedOrigins("*")
+                    .allowedOrigins(ALLOWED_ORIGINS)
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
                     .allowedHeaders("*")
                     .exposedHeaders("ETag", "Content-Length", "Accept-Ranges", "Content-Range")

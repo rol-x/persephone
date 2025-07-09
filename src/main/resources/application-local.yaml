@@ -1,0 +1,12 @@
+cors:
+  allowed-origins: http://localhost:5173
+
+spring:
+  datasource:
+    url: jdbc:h2:file:/data/persephone
+    username: sa
+    password:
+  liquibase:
+    url: jdbc:h2:file:/data/persephone
+    user: sa
+    password:

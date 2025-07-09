@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig {
-    private static final String[] ALLOWED_ORIGINS = { "https://persephone.run" };
+    private static final String[] ALLOWED_ORIGINS = { "https://persephone.run", "https://api.persephone.run" };
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {

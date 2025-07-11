@@ -30,12 +30,13 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
 
         String method = request.getMethod();
         String ip = request.getRemoteAddr();
+        String referer = request.getHeader("Referer");
         String body = request.getReader().lines().reduce("", (a, b) -> a + b);
 
         if (StringUtils.isNotBlank(body)) {
-            log.info("Incoming request: {} {} (IP: {})\n{}", method, uri, ip, body);
+            log.info("Incoming request: {} {} (Referer: {}, IP: {})\n{}", method, uri, referer, ip, body);
         } else {
-            log.info("Incoming request: {} {} (IP: {})", method, uri, ip);
+            log.info("Incoming request: {} {} (Referer: {}, IP: {})", method, uri, referer, ip);
         }
 
         filterChain.doFilter(request, response);

@@ -5,13 +5,15 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.ScheduledExecutorService;
 
 @Component
 public class DateTimeWebSocketHandler extends BaseTextWebSocketHandler {
-    private final DateTimeFormatter formatter = DateTimeFormatter
+    private static final DateTimeFormatter formatter = DateTimeFormatter
         .ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
 
-    public DateTimeWebSocketHandler() {
+    public DateTimeWebSocketHandler(ScheduledExecutorService scheduler) {
+        super(scheduler);
         schedule(this::broadcastTime, 0, 1);
     }
 

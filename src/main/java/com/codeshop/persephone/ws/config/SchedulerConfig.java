@@ -11,6 +11,6 @@ public class SchedulerConfig {
 
     @Bean(name = "scheduler", destroyMethod = "shutdown")
     public ScheduledExecutorService sharedScheduler() {
-        return Executors.newScheduledThreadPool(3);
+        return Executors.newScheduledThreadPool(2);
     }
 }

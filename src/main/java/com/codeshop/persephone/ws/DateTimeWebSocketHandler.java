@@ -14,7 +14,11 @@ public class DateTimeWebSocketHandler extends BaseTextWebSocketHandler {
 
     public DateTimeWebSocketHandler(ScheduledExecutorService scheduler) {
         super(scheduler);
-        schedule(this::broadcastTime, 0, 1);
+    }
+
+    @Override
+    protected void startScheduledTask() {
+        scheduledTask = schedule(this::broadcastTime, 0, 1);
     }
 
     private void broadcastTime() {

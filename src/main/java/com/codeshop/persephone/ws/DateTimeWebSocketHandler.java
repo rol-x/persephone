@@ -18,7 +18,7 @@ public class DateTimeWebSocketHandler extends BaseTextWebSocketHandler {
 
     @Override
     protected void startScheduledTask() {
-        scheduledTask = schedule(this::broadcastTime, 1);
+        scheduledTask = schedule(this::broadcastTime, 500);
     }
 
     private void broadcastTime() {

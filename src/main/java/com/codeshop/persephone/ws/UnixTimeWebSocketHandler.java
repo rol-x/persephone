@@ -14,7 +14,7 @@ public class UnixTimeWebSocketHandler extends BaseTextWebSocketHandler {
 
     @Override
     protected void startScheduledTask() {
-        scheduledTask = schedule(this::broadcastUnixTime, 1);
+        scheduledTask = schedule(this::broadcastUnixTime, 500);
     }
 
     private void broadcastUnixTime() {

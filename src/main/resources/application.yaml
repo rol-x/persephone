@@ -7,6 +7,9 @@ cors:
 spring:
   application:
     name: persephone
+  threads:
+    virtual:
+      enabled: true
   devtools:
     restart:
       enabled: false

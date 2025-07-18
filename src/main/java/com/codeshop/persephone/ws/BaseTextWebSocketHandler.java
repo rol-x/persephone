@@ -66,7 +66,7 @@ public abstract class BaseTextWebSocketHandler extends TextWebSocketHandler {
         }
     }
 
-    protected ScheduledFuture<?> schedule(Runnable task, long initialDelay, long intervalSeconds) {
-        return scheduler.scheduleAtFixedRate(task, initialDelay, intervalSeconds, TimeUnit.SECONDS);
+    protected ScheduledFuture<?> schedule(Runnable task, long intervalSeconds) {
+        return scheduler.scheduleAtFixedRate(task, 0, intervalSeconds, TimeUnit.SECONDS);
     }
 }

@@ -14,12 +14,11 @@ public class UnixTimeWebSocketHandler extends BaseTextWebSocketHandler {
 
     @Override
     protected void startScheduledTask() {
-        scheduledTask = schedule(this::broadcastUnixTime, 0, 1);
+        scheduledTask = schedule(this::broadcastUnixTime, 1);
     }
 
     private void broadcastUnixTime() {
-        long unix = Instant.now().getEpochSecond();
-        String json = "{\"unix\": " + unix + "}";
+        final String json = String.format("{\"unix\": %d}", Instant.now().getEpochSecond());
         broadcast(json);
     }
 }

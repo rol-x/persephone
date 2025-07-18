@@ -18,12 +18,12 @@ public class DateTimeWebSocketHandler extends BaseTextWebSocketHandler {
 
     @Override
     protected void startScheduledTask() {
-        scheduledTask = schedule(this::broadcastTime, 0, 1);
+        scheduledTask = schedule(this::broadcastTime, 1);
     }
 
     private void broadcastTime() {
-        String datetime = formatter.format(Instant.now());
-        String json = "{\"datetime\": \"" + datetime + "\"}";
+        final String datetime = formatter.format(Instant.now());
+        final String json = String.format("{\"datetime\": \"%s\"}", datetime);
         broadcast(json);
     }
 }

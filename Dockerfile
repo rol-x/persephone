@@ -11,4 +11,5 @@ FROM amazoncorretto:21
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8084
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENV JAVA_TOOL_OPTIONS="-XX:-UseContainerSupport -Xms256m -Xmx768m -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=50"
+ENTRYPOINT ["java","-jar","app.jar"]

@@ -2,9 +2,6 @@ cors:
   allowed-origins: http://localhost:5173, chrome-extension://fgponpodhbmadfljofbimhhlengambbn
 
 spring:
-  devtools:
-    restart:
-      enabled: false
   datasource:
     url: jdbc:h2:file:/data/persephone
     username: sa

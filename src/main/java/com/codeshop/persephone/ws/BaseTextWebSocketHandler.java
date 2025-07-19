@@ -1,6 +1,8 @@
 package com.codeshop.persephone.ws;
 
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.socket.CloseStatus;
@@ -13,9 +15,11 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
-@RequiredArgsConstructor
 public abstract class BaseTextWebSocketHandler extends TextWebSocketHandler {
-    protected final Set<WebSocketSession> sessions = ConcurrentHashMap.newKeySet();
+    private final Set<WebSocketSession> sessions = ConcurrentHashMap.newKeySet();
+    protected static final ObjectMapper mapper = new ObjectMapper();
+
+    private static final int BROADCAST_RATE_MS = 1000;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
@@ -24,26 +28,42 @@ public abstract class BaseTextWebSocketHandler extends TextWebSocketHandler {
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-        log.info("WebSocket connection closed: {}", session.getId());
+    public void afterConnectionClosed(WebSocketSession session, @NonNull CloseStatus status) {
+        log.info("WebSocket connection closed: {} (status={})", session.getId(), status.getCode());
         sessions.remove(session);
     }
 
-    protected void broadcast(String json) {
-        log.info("Broadcasting message: {}", json);
-        sessions.removeIf(s -> !s.isOpen());
-        if (sessions.isEmpty()) {
-            log.info("No WebSocket sessions to broadcast to");
-            return;
-        }
+    @Override
+    public void handleTransportError(WebSocketSession session, Throwable exception) {
+        log.warn("WebSocket transport error: {} (message: {})", session.getId(), exception.getMessage());
+        sessions.remove(session);
+    }
 
+    protected abstract String createMessage() throws JsonProcessingException;
+
+    @Scheduled(fixedRate = BROADCAST_RATE_MS)
+    private void broadcastMessage() {
+        if (noSessions()) return;
+        try {
+            broadcast(createMessage());
+        } catch (JsonProcessingException e) {
+            log.error("JSON serialization error", e);
+        }
+    }
+
+    private boolean noSessions() {
+        sessions.removeIf(s -> !s.isOpen());
+        return sessions.isEmpty();
+    }
+
+    private void broadcast(String json) {
         TextMessage message = new TextMessage(json);
         for (WebSocketSession session : sessions) {
             try {
-                log.info("Sending message {} to {}", message, session.getId());
+                log.debug("Sending message {} to {}", message, session.getId());
                 session.sendMessage(message);
             } catch (IOException e) {
-                log.warn(e.getMessage(), e);
+                log.warn("Failed send to {}: {}", session.getId(), e.getMessage());
             }
         }
     }

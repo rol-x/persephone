@@ -13,7 +13,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Builder
@@ -27,7 +26,7 @@ public class ProposedGroup {
     private Integer proposedGroupId;
 
     @Column
-    private UUID proposedGameId;
+    private String proposedGameId;
 
     @Column
     private String words;

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ConnectionsRepository extends JpaRepository<ConnectionsGame, Long> {
+public interface ConnectionsRepository extends JpaRepository<ConnectionsGame, Integer> {
 
     Optional<ConnectionsGame> findByDate(String date);
 }

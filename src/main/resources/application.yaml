@@ -14,6 +14,7 @@ spring:
     url: ${DB_URL}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
+    driver-class-name: org.sqlite.JDBC
   liquibase:
     enabled: true
     url: ${DB_URL}
@@ -22,10 +23,15 @@ spring:
     drop-first: false
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    show-sql: true
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}
+  h2:
+    console:
+      enabled: true
 
 logging:
   level:

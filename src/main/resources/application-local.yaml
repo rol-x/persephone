@@ -3,10 +3,10 @@ cors:
 
 spring:
   datasource:
-    url: jdbc:h2:file:/data/persephone
+    url: jdbc:sqlite:connections.db
     username: sa
     password:
   liquibase:
-    url: jdbc:h2:file:/data/persephone
+    url: jdbc:sqlite:connections.db
     user: sa
     password:

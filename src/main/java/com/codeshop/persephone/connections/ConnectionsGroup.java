@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +23,8 @@ import java.util.Set;
 @Table(name = "groups")
 public class ConnectionsGroup {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "groups_seq")
+    @SequenceGenerator(name = "groups_seq", sequenceName = "groups_seq", allocationSize = 1)
     @Column(nullable = false)
     private Integer groupId;
 

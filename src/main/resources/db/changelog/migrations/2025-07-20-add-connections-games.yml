@@ -53,3 +53,18 @@ databaseChangeLog:
                   name: color
                   type: varchar
 
+  - changeSet:
+      author: Karol Latos
+      id: create-games-sequence
+      changes:
+        - createSequence:
+            sequenceName: games_seq
+            startValue: 1
+
+  - changeSet:
+      author: Karol Latos
+      id: create-groups-sequence
+      changes:
+        - createSequence:
+            sequenceName: groups_seq
+            startValue: 1

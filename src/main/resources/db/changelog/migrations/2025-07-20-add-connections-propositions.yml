@@ -30,3 +30,11 @@ databaseChangeLog:
                   type: varchar
                   constraints:
                     nullable: true
+
+  - changeSet:
+      author: Karol Latos
+      id: create-proposed-groups-sequence
+      changes:
+        - createSequence:
+            sequenceName: proposed_groups_seq
+            startValue: 1

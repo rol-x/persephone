@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +23,8 @@ import java.util.Set;
 @Table
 public class ProposedGroup {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "proposed_groups_seq")
+    @SequenceGenerator(name = "proposed_groups_seq", sequenceName = "proposed_groups_seq", allocationSize = 1)
     private Integer proposedGroupId;
 
     @Column

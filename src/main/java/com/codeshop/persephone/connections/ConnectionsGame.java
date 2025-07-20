@@ -46,4 +46,9 @@ public class ConnectionsGame {
             .filter(group -> group.matches(words))
             .findFirst();
     }
+
+    public ConnectionsGame incrementSolvedCount() {
+        solvedBy = solvedBy + 1;
+        return this;
+    }
 }

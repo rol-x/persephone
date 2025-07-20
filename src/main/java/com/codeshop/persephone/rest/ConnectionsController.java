@@ -28,9 +28,14 @@ public class ConnectionsController {
     }
 
     @PostMapping("/{gameId}/check")
-    public GuessResponse checkGroupGuess(@PathVariable Long gameId, @RequestBody GroupGuess groupGuess) {
+    public GuessResponse checkGroupGuess(@PathVariable Integer gameId, @RequestBody GroupGuess groupGuess) {
         return connectionsService.check(gameId, groupGuess.words())
             .map(GuessResponse::correct)
             .orElseGet(GuessResponse::incorrect);
+    }
+
+    @PostMapping("/{gameId}/solved")
+    public int markSolved(@PathVariable Integer gameId) {
+        return connectionsService.incrementSolved(gameId);
     }
 }

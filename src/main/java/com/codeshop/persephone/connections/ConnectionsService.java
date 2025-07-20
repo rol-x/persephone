@@ -20,8 +20,16 @@ public class ConnectionsService {
         return connectionsRepository.findByDate(today).orElseThrow();
     }
 
-    public Optional<ConnectionsGroup> check(Long gameId, Set<String> words) {
-        var game = connectionsRepository.findById(gameId).orElseThrow();
-        return game.findGroup(words);
+    public Optional<ConnectionsGroup> check(Integer gameId, Set<String> words) {
+        return connectionsRepository.findById(gameId)
+            .flatMap(game -> game.findGroup(words));
+    }
+
+    public int incrementSolved(Integer gameId) {
+        return connectionsRepository.findById(gameId)
+            .map(ConnectionsGame::incrementSolvedCount)
+            .map(connectionsRepository::save)
+            .map(ConnectionsGame::getSolvedBy)
+            .orElse(0);
     }
 }

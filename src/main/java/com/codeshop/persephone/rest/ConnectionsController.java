@@ -1,8 +1,8 @@
 package com.codeshop.persephone.rest;
 
-import com.codeshop.persephone.connections.ConnectionsGame;
 import com.codeshop.persephone.connections.ConnectionsService;
 import com.codeshop.persephone.rest.dto.ConnectionsPuzzle;
+import com.codeshop.persephone.rest.dto.GroupGuess;
 import com.codeshop.persephone.rest.dto.GuessResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,11 +21,6 @@ public class ConnectionsController {
     private final ConnectionsService connectionsService;
 
     @GetMapping("/daily")
-    public ConnectionsGame dailyConnectionsPuzzle() {
-        return connectionsService.daily();
-    }
-
-    @GetMapping("/daily/v2")
     public ConnectionsPuzzle dailyConnectionsPuzzleV2() {
         return ConnectionsPuzzle.fromGame(
             connectionsService.daily()
@@ -33,8 +28,8 @@ public class ConnectionsController {
     }
 
     @PostMapping("/{gameId}/check")
-    public GuessResponse checkGroupGuess(@PathVariable Long gameId, @RequestBody String groupGuess) {
-        return connectionsService.check(gameId, groupGuess)
+    public GuessResponse checkGroupGuess(@PathVariable Long gameId, @RequestBody GroupGuess groupGuess) {
+        return connectionsService.check(gameId, groupGuess.words())
             .map(GuessResponse::correct)
             .orElseGet(GuessResponse::incorrect);
     }

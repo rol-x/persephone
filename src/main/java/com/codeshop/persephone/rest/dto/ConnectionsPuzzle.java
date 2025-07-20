@@ -7,16 +7,23 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public record ConnectionsPuzzle(Long gameId, Set<String> words, List<String> authors) {
+import static java.util.Collections.shuffle;
+
+public record ConnectionsPuzzle(Integer gameId, List<String> words, List<String> authors) {
 
     public static ConnectionsPuzzle fromGame(ConnectionsGame game) {
         var gameId = game.getGameId();
         var authors = game.getAuthors().split(",");
-        var words = game.getGroups().stream()
+        List<String> words = game.getGroups().stream()
             .map(ConnectionsGroup::getWords)
             .flatMap(Set::stream)
-            .collect(Collectors.toSet());
-
+            .collect(Collectors.collectingAndThen(
+                Collectors.toList(),
+                list -> {
+                    shuffle(list);
+                    return list;
+                }
+            ));
         return new ConnectionsPuzzle(gameId, words, List.of(authors));
     }
 }

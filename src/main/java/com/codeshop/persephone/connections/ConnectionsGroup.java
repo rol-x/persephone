@@ -24,12 +24,12 @@ import java.util.Set;
 @Table(name = "groups")
 public class ConnectionsGroup {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private Long groupId;
+    private Integer groupId;
 
     @Column(nullable = false)
-    private Long gameId;
+    private Integer gameId;
 
     @JsonIgnore
     @Column(nullable = false)

@@ -1,2 +1,12 @@
 cors:
   allowed-origins: http://localhost:5173, chrome-extension://fgponpodhbmadfljofbimhhlengambbn
+
+spring:
+  datasource:
+    url: ${DB_URL}?currentSchema=dev
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  liquibase:
+    url: ${DB_URL}?currentSchema=dev
+    user: ${DB_USER}
+    password: ${DB_PASSWORD}

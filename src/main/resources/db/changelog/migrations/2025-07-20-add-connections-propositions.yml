@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      author: Karol Latos
+      id: create-proposed-groups-table
+      changes:
+        - createTable:
+            tableName: proposed_group
+            columns:
+              - column:
+                  name: proposed_group_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: proposed_game_id
+                  type: blob
+              - column:
+                  name: words
+                  type: varchar
+              - column:
+                  name: explanation
+                  type: varchar
+              - column:
+                  name: color
+                  type: varchar
+                  constraints:
+                    nullable: true
+              - column:
+                  name: author
+                  type: varchar
+                  constraints:
+                    nullable: true

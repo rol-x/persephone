@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      author: Karol Latos
+      id: create-games-table
+      changes:
+        - createTable:
+            tableName: games
+            columns:
+              - column:
+                  name: game_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: date
+                  type: varchar
+              - column:
+                  name: authors
+                  type: varchar
+                  constraints:
+                    nullable: true
+              - column:
+                  name: solved_by
+                  type: int
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      author: Karol Latos
+      id: create-groups-table
+      changes:
+        - createTable:
+            tableName: groups
+            columns:
+              - column:
+                  name: group_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: game_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_group_game
+                    references: games(game_id)
+              - column:
+                  name: words
+                  type: varchar
+              - column:
+                  name: explanation
+                  type: varchar
+              - column:
+                  name: color
+                  type: varchar
+

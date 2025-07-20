@@ -11,7 +11,9 @@ public class PropositionService {
     private final PropositionRepository propositionRepository;
 
     public void save(List<ProposedGroup> proposedGroups) {
-        propositionRepository.saveAll(proposedGroups);
+        proposedGroups.stream()
+                .filter(group -> group.getWords().size() == 4)
+                .forEach(propositionRepository::save);
     }
 
     public List<ProposedGroup> findAll() {

@@ -25,9 +25,8 @@ import java.util.UUID;
 @Table
 public class ProposedGroup {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(nullable = false)
-    private Long proposedGroupId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer proposedGroupId;
 
     @Column
     private UUID proposedGameId;

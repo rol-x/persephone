@@ -1,12 +1,2 @@
 cors:
   allowed-origins: http://localhost:5173, chrome-extension://fgponpodhbmadfljofbimhhlengambbn
-
-spring:
-  datasource:
-    url: jdbc:sqlite:connections.db
-    username: sa
-    password:
-  liquibase:
-    url: jdbc:sqlite:connections.db
-    user: sa
-    password:

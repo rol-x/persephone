@@ -13,7 +13,7 @@ databaseChangeLog:
                     primaryKey: true
               - column:
                   name: proposed_game_id
-                  type: blob
+                  type: varchar
               - column:
                   name: words
                   type: varchar

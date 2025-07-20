@@ -1,7 +1,7 @@
-package com.codeshop.persephone.ws.config;
+package com.codeshop.persephone.time.ws.config;
 
-import com.codeshop.persephone.ws.DateTimeWebSocketHandler;
-import com.codeshop.persephone.ws.UnixTimeWebSocketHandler;
+import com.codeshop.persephone.time.ws.DateTimeWebSocketHandler;
+import com.codeshop.persephone.time.ws.UnixTimeWebSocketHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

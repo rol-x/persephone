@@ -32,13 +32,7 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         String method = request.getMethod();
         String ip = request.getRemoteAddr();
         String origin = request.getHeader("Origin");
-        String body = request.getReader().lines().reduce("", (a, b) -> a + b);
-
-        if (StringUtils.isNotBlank(body)) {
-            log.info("Incoming request: {} {} (Origin: {}, IP: {})\n{}", method, uri, origin, ip, body);
-        } else {
-            log.info("Incoming request: {} {} (Origin: {}, IP: {})", method, uri, origin, ip);
-        }
+        log.info("Incoming request: {} {} (Origin: {}, IP: {})", method, uri, origin, ip);
 
         filterChain.doFilter(request, response);
     }

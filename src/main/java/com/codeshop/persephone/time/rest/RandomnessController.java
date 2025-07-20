@@ -1,4 +1,4 @@
-package com.codeshop.persephone.rest;
+package com.codeshop.persephone.time.rest;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.web.bind.annotation.GetMapping;

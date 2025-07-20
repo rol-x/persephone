@@ -13,15 +13,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.minidev.json.annotate.JsonIgnore;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "connection_groups")
 @Entity
+@Table(name = "groups")
 public class ConnectionsGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -29,19 +29,23 @@ public class ConnectionsGroup {
     private Long groupId;
 
     @Column(nullable = false)
-    private Long connectionsId;
-
-    @Column(nullable = false)
-    private String explanation;
+    private Long gameId;
 
     @JsonIgnore
     @Column(nullable = false)
     private String words;
 
     @Column(nullable = false)
+    private String explanation;
+
+    @Column(nullable = false)
     private String color;
 
-    public List<String> getWordsList() {
-        return List.of(words.split(","));
+    public Set<String> getWords() {
+        return Set.of(words.split(","));
+    }
+
+    public boolean matches(Set<String> words) {
+        return getWords().containsAll(words) && words.containsAll(getWords());
     }
 }

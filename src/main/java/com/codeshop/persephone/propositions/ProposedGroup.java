@@ -1,11 +1,11 @@
-package com.codeshop.persephone.connections;
+package com.codeshop.persephone.propositions;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,28 +13,38 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
-@Entity
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "connections")
-public class Connections {
+@NoArgsConstructor
+@Entity
+@Table
+public class ProposedGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false)
-    private Long id;
-
-    @Column(nullable = false)
-    private LocalDate date;
+    private Long proposedGroupId;
 
     @Column
-    private long solvedBy;
+    private UUID proposedGameId;
 
-    @OneToMany
-    private List<ConnectionsGroup> groups;
+    @Column
+    private String words;
+
+    @Column
+    private String explanation;
+
+    @Column
+    private String color;
+
+    @Column
+    private String author;
+
+    public Set<String> getWords() {
+        return Set.of(words.split(","));
+    }
 }

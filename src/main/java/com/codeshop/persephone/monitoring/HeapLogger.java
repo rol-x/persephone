@@ -1,4 +1,4 @@
-package com.codeshop.persephone.log;
+package com.codeshop.persephone.monitoring;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -13,14 +13,14 @@ public class HeapLogger { // why so serious?
     private final long maxMemoryInMB = getMaxMemoryInMB();
 
     public HeapLogger() {
-        lastUsed        = getUsedMemoryInMB();
-        lastCommitted   = getCommittedMemoryInMB();
+        lastUsed = getUsedMemoryInMB();
+        lastCommitted = getCommittedMemoryInMB();
     }
 
     @Scheduled(fixedRate = 10_000)
     public void logHeapChange() {
-        long used       = getUsedMemoryInMB();
-        long committed  = getCommittedMemoryInMB();
+        long used = getUsedMemoryInMB();
+        long committed = getCommittedMemoryInMB();
 
         var logMessage = buildLog(used, committed);
         if (committed != lastCommitted || used < lastUsed) {

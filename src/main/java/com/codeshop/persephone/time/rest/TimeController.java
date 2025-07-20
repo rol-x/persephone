@@ -1,4 +1,4 @@
-package com.codeshop.persephone.rest;
+package com.codeshop.persephone.time.rest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

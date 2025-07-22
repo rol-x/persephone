@@ -1,6 +1,7 @@
 package com.codeshop.persephone.propositions;
 
 
+import com.codeshop.persephone.connections.ConnectionsGroup;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,5 +45,13 @@ public class ProposedGroup {
 
     public Set<String> getWords() {
         return Set.of(words.split(","));
+    }
+
+    public ConnectionsGroup toConnectionsGroup() {
+        return ConnectionsGroup.builder()
+            .explanation(explanation)
+            .words(words)
+            .color(color)
+            .build();
     }
 }

@@ -3,8 +3,10 @@ package com.codeshop.persephone.rest;
 import com.codeshop.persephone.propositions.ProposedGroup;
 import com.codeshop.persephone.propositions.PropositionService;
 import com.codeshop.persephone.rest.dto.ConnectionsProposition;
+import com.codeshop.persephone.rest.dto.PropositionApproval;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,16 @@ public class PropositionsController {
     @GetMapping
     public List<ProposedGroup> getConnectionsPropositions() {
         return propositionService.findAll();
+    }
+
+    @GetMapping("/{proposedGameId}")
+    public List<ProposedGroup> getProposedGame(@PathVariable String proposedGameId) {
+        return propositionService.findById(proposedGameId);
+    }
+
+    @PostMapping("/approve")
+    public void approveGameProposition(@RequestBody PropositionApproval approval) {
+        propositionService.approveForDate(approval.proposedGameId(), approval.date());
     }
 
 }

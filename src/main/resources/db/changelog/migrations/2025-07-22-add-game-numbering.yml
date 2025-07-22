@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      author: Karol Latos
+      id: add-game-number-column
+      changes:
+        - addColumn:
+            tableName: games
+            columns:
+              - column:
+                  name: number
+                  type: int
+                  constraints:
+                    nullable: true

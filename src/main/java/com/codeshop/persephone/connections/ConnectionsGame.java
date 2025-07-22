@@ -43,6 +43,9 @@ public class ConnectionsGame {
     @Column
     private int solvedBy;
 
+    @Column
+    private Integer number;
+
     public Optional<ConnectionsGroup> findGroup(Set<String> words) {
         return groups.stream()
             .filter(group -> group.matches(words))

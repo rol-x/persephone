@@ -43,6 +43,10 @@ public class ProposedGroup {
     @Column
     private String author;
 
+    public String getWordsString() {
+        return words;
+    }
+
     public Set<String> getWords() {
         return Set.of(words.split(","));
     }

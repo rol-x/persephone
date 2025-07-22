@@ -6,6 +6,7 @@ import com.codeshop.persephone.rest.dto.ConnectionsProposition;
 import com.codeshop.persephone.rest.dto.PropositionApproval;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +36,11 @@ public class PropositionsController {
     @GetMapping("/{proposedGameId}")
     public List<ProposedGroup> getProposedGame(@PathVariable String proposedGameId) {
         return propositionService.findById(proposedGameId);
+    }
+
+    @PatchMapping
+    public void updateProposedGroup(@RequestBody ProposedGroup group) {
+        propositionService.updateGroup(group);
     }
 
     @PostMapping("/approve")

@@ -19,7 +19,7 @@ public class CorsConfig {
             public void addCorsMappings(@SuppressWarnings("NullableProblems") CorsRegistry registry) {
                 registry.addMapping("/**")
                     .allowedOrigins(allowedOrigins)
-                    .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
+                    .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS")
                     .allowedHeaders("*")
                     .exposedHeaders("ETag", "Content-Length", "Accept-Ranges", "Content-Range")
                     .maxAge(3600);

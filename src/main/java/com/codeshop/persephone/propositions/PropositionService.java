@@ -37,4 +37,8 @@ public class PropositionService {
             .build();
         // complete me!
     }
+
+    public void updateGroup(ProposedGroup group) {
+        propositionRepository.save(group);
+    }
 }

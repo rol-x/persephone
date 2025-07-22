@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 
 import static java.util.Collections.shuffle;
 
-public record ConnectionsPuzzle(Integer gameId, List<String> words, List<String> authors) {
+public record ConnectionsPuzzle(int gameId, List<String> words, List<String> authors) {
 
     public static ConnectionsPuzzle fromGame(ConnectionsGame game) {
-        var gameId = game.getGameId();
+        int gameId = game.getGameId();
         var authors = game.getAuthors().split(",");
         List<String> words = game.getGroups().stream()
             .map(ConnectionsGroup::getWords)

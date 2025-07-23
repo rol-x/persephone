@@ -84,7 +84,7 @@ public class PropositionService {
         return LocalDate.parse(date).minusDays(1).toString();
     }
 
-    public void updateGroup(ProposedGroup group) {
+    public void upsertGroup(ProposedGroup group) {
         propositionRepository.save(group);
     }
 }
